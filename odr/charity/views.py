@@ -11,7 +11,20 @@ class LandingPageView(View):
     def get(self, request):
         quantity = Donation.objects.all().aggregate(Sum('quantity'))
         donation = Institution.objects.count()
-        return render(request, 'landing_page.html', {'quantity': quantity, 'donation': donation})
+        fund = Institution.objects.filter(type=0)[:4]
+        if len(fund) == 0:
+            fund = None
+        orgs = Institution.objects.filter(type=1)[:4]
+        if len(orgs) == 0:
+            orgs = None
+        locales = Institution.objects.filter(type=2)[:4]
+        if len(locales) == 0:
+            locales = None
+        return render(request, 'landing_page.html', {'quantity': quantity,
+                                                     'donation': donation,
+                                                     'fund': fund,
+                                                     'orgs': orgs,
+                                                     'locales': locales})
 
 
 class AddDonationPageViev(View):

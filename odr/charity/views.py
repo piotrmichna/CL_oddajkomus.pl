@@ -21,3 +21,10 @@ class LoginView(View):
 
     def get(self, request):
         return render(request, 'login.html')
+
+
+class RegistrationView(View):
+    """STRONA FORMULARZA REJESTRACJI"""
+
+    def get(self, request):
+        return render(request, 'register.html')

@@ -152,31 +152,31 @@
 
         <!-- SLIDE 3 -->
         <div class="help--slides" data-id="3">
-            <p>Lorem ipsum dolor sit amet, his ocurreret persequeris ea, ad utinam laudem duo. Verterem adipisci
-                partiendo
-                eos ne, ea his reque quaeque recteque, ne quo lobortis intellegam.</p>
+            <p>
+                {% if locales is None %}
+                    Brak zarejestrowanych Lokalnych zbiórek
+                {% else %}
+                    Posiadamy też listę aktualnych Lokalnych zbiórek, które zweryfikowaliśmy.
+                    Możesz sprawdzić gdzie się znajdują, komu pomagają i czego potrzebują.
+                {% endif %}
+            </p>
             <ul class="help--slides-items">
-                <li>
-                    <div class="col">
-                        <div class="title">Lokalna zbiórka 1</div>
-                        <div class="subtitle">Lorem ipsum dolor sit amet consectetur.</div>
-                    </div>
+                {% for locale in locales %}
+                    <li>
+                        <div class="col">
+                            <div class="title">"{{ locale.name }}"</div>
+                            <div class="subtitle">{{ locale.description }}</div>
+                        </div>
 
-                    <div class="col">
-                        <div class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="col">
-                        <div class="title">Lokalna zbiórka 2</div>
-                        <div class="subtitle">Lorem ipsum dolor sit amet consectetur.</div>
-                    </div>
-
-                    <div class="col">
-                        <div class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-                    </div>
-                </li>
+                        <div class="col">
+                            <div class="text">
+                                {% for category in locale.categories.all %}
+                                    {% if forloop.last %}{{ category }}{% else %}{{ category }},{% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
             </ul>
 
             <!-- Pagination

@@ -1,3 +1,5 @@
+from django.core.management import BaseCommand
+
 from charity.management.commands_data.charity_data import CATEGORY_DATA, INSTITUTION_DATA, DONATION_DATA
 from charity.models import Category, Institution, Donation
 
@@ -30,3 +32,13 @@ def insert_donation():
         for catid in categories:
             donat.categories.add(Category.objects.get(id=catid))
         donat.save()
+
+
+class Command(BaseCommand):
+    help = 'Wstawienie danych dobroczynnośći do bazy.'
+
+    def handle(self, *args, **options):
+        insert_category()
+        insert_institutions()
+        insert_donation()
+        print('Pomyślnie dodano testowe dane do bazy.')

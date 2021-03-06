@@ -14,3 +14,10 @@ class AddDonationPageViev(View):
 
     def get(self, request):
         return render(request, 'donation_add.html')
+
+
+class LoginView(View):
+    """STRONA FORMULARZA LOGOWANIA"""
+
+    def get(self, request):
+        return render(request, 'login.html')

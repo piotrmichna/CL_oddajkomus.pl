@@ -4,6 +4,16 @@ from charity.management.commands_data.charity_data import CATEGORY_DATA, INSTITU
 from charity.models import Category, Institution, Donation
 
 
+# czyszczenie zawartosci tabel
+# TRUNCATE TABLE charity_category RESTART IDENTITY CASCADE;
+# TRUNCATE TABLE charity_donation_categories RESTART IDENTITY CASCADE;
+# TRUNCATE TABLE charity_donation RESTART IDENTITY CASCADE;
+# TRUNCATE TABLE charity_institution_categories RESTART IDENTITY CASCADE;
+# TRUNCATE TABLE charity_institution RESTART IDENTITY CASCADE;
+
+# ---wywołanie----
+# python manage.py insert_charity_data
+
 def insert_category():
     for name in CATEGORY_DATA:
         Category.objects.create(name=name)
